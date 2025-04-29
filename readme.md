@@ -44,7 +44,55 @@ Welcome to 🌦️ **UKWeather**, your go-to Django-based application for real-t
 
 ---
 
-### 2️⃣ Usage
+### 2️⃣ Project Structure
+
+```
+readme.md
+demox/
+    db.sqlite3
+    manage.py
+    demox/
+        __init__.py
+        asgi.py
+        settings.py
+        urls.py
+        wsgi.py
+        __pycache__/
+    ukweather/
+        __init__.py
+        admin.py
+        apps.py
+        forms.py
+        models.py
+        tests.py
+        urls.py
+        views.py
+        __pycache__/
+        migrations/
+        templates/
+env/
+    pyvenv.cfg
+    Include/
+    Lib/
+        site-packages/
+    Scripts/
+        activate
+        activate.bat
+        Activate.ps1
+        deactivate.bat
+        django-admin.exe
+        normalizer.exe
+        pip.exe
+        pip3.12.exe
+        pip3.exe
+        python.exe
+        pythonw.exe
+        sqlformat.exe
+```
+
+---
+
+### 3️⃣ Usage
 
 1. 🔎 **Search**: Enter a UK city or region in the search bar.
 2. 🌡️ **View Weather**: Check current conditions like temperature, humidity, and more.
