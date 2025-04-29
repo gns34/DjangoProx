@@ -77,17 +77,8 @@ env/
         site-packages/
     Scripts/
         activate
-        activate.bat
-        Activate.ps1
-        deactivate.bat
-        django-admin.exe
-        normalizer.exe
-        pip.exe
-        pip3.12.exe
-        pip3.exe
-        python.exe
-        pythonw.exe
-        sqlformat.exe
+        ...
+        ...
 ```
 
 ---
