@@ -4,14 +4,14 @@
     <title>Enter Name</title>
 </head>
 <body>
-    <h1>Enter your name</h1>
+    <h1>Enter your city</h1>
     <form method="post">
         {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
 
-    {% if name %}
-        <h2>Hello, {{ name }}!</h2>
+    {% if city %}
+        <h2>Welcome, {{ city }}!</h2>
     {% endif %}
 </body>
 </html>

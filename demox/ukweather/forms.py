@@ -1,5 +1,4 @@
 from django import forms
 
-# creating a form 
-class NameForm(forms.Form):
-    name = forms.CharField(label='Enter your name', max_length=100)
+class CityName(forms.Form):
+    city = forms.CharField(label='Enter your city', max_length=100)

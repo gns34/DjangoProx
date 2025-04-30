@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import *
 from django.template import loader
-from .forms import NameForm
+from .forms import CityName
 import requests
 from django.conf import settings
 # Create your views here.
@@ -13,11 +13,11 @@ def index(request):
 #     return HttpResponse(template.render())
 
 def ukweather(request):
-    name = None
+    city = None
     if request.method == 'POST':
-        form = NameForm(request.POST)
+        form = CityName(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
+            city = form.cleaned_data['city']
     else:
-        form = NameForm()
-    return render(request, 'homefile.html', {'form': form, 'name': name})
+        form = CityName()
+    return render(request, 'homefile.html', {'form': form, 'city': city})
