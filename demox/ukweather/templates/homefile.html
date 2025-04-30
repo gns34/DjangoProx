@@ -1,67 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Enter Name</title>
 </head>
+<body>
+    <h1>Enter your name</h1>
+    <form method="post">
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
 
-<body class="bg-gradient-to-r from-blue-500 to-indigo-600 min-h-screen flex items-center justify-center">
-    <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-6">
-        <div class="text-center">
-            <h1 class="text-3xl font-bold text-gray-800">Weather Forecast</h1>
-            <p class="text-gray-600 mt-2">Your city's weather at a glance</p>
-        </div>
-        <div class="mt-6 flex justify-center">
-            <input type="text" placeholder="Enter city name"
-                class="w-2/3 px-4 py-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-            <button
-                class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-r-lg hover:bg-blue-600 transition duration-300">Search</button>
-        </div>
-        <div class="mt-8 text-center">
-            <div class="animate-bounce">
-                <svg class="w-16 h-16 mx-auto text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 2a9 9 0 00-9 9h3a6 6 0 0112 0h3a9 9 0 00-9-9zM12 22a9 9 0 009-9h-3a6 6 0 01-12 0H3a9 9 0 009 9z" />
-                </svg>
-            </div>
-            <h2 class="text-2xl font-bold text-gray-800 mt-4">25°C</h2>
-            <p class="text-gray-600">Sunny</p>
-            <p class="text-gray-500 mt-2">London, UK</p>
-        </div>
-        <div class="mt-6 grid grid-cols-3 gap-4 text-center">
-            <div>
-                <p class="text-gray-600">Mon</p>
-                <svg class="w-8 h-8 mx-auto text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 2a9 9 0 00-9 9h3a6 6 0 0112 0h3a9 9 0 00-9-9zM12 22a9 9 0 009-9h-3a6 6 0 01-12 0H3a9 9 0 009 9z" />
-                </svg>
-                <p class="text-gray-800 font-bold">22°C</p>
-            </div>
-            <div>
-                <p class="text-gray-600">Tue</p>
-                <svg class="w-8 h-8 mx-auto text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M3 15a4 4 0 008 0m-8 0a4 4 0 018 0m-8 0v6m8-6v6m-8-6h8" />
-                </svg>
-                <p class="text-gray-800 font-bold">18°C</p>
-            </div>
-            <div>
-                <p class="text-gray-600">Wed</p>
-                <svg class="w-8 h-8 mx-auto text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M3 15a4 4 0 008 0m-8 0a4 4 0 018 0m-8 0v6m8-6v6m-8-6h8" />
-                </svg>
-                <p class="text-gray-800 font-bold">15°C</p>
-            </div>
-        </div>
-    </div>
+    {% if name %}
+        <h2>Hello, {{ name }}!</h2>
+    {% endif %}
 </body>
-
 </html>

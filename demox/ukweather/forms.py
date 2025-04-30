@@ -1,12 +1,5 @@
-from django import form
+from django import forms
 
-class getCity(forms.Form):
-    cityName=forms.CharField(
-        label='Enter a city',
-        max_length=50,
-        widget=forms.TextInput(attrs={
-            'placeholder' :'London, Amsterdam',
-            'class':'form-control' 
-        })
-
-    )
+# creating a form 
+class NameForm(forms.Form):
+    name = forms.CharField(label='Enter your name', max_length=100)
