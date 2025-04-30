@@ -1,30 +1,167 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-        .weather-box { border: 1px solid #ccc; padding: 20px; max-width: 300px; margin: 0 auto; }
-        h1 { color: #333; }
-        input, button { padding: 10px; margin-top: 10px; }
+        /* Add keyframe animation for fade-in effect */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out; /* Faster animation */
+        }
     </style>
 </head>
-<body>
-    <h1>Weather Dashboard</h1>
-    <form method="GET" action="">
-        <input type="text" name="city" placeholder="Enter city name">
-        <button type="submit">Search</button>
-    </form>
+<body class="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 min-h-screen text-white font-sans">
+    <div class="container mx-auto p-6">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold mb-2">🌦️ Weather Dashboard</h1>
+            <p class="text-lg text-gray-300">Get real-time weather updates with detailed insights</p>
+        </header>
 
-    {% if error %}
-    <p>{{ error }}</p>
-    {% else %}
-    <div class="weather-box">
-        <h2>{{ city }} Weather</h2>
-        <p>Temperature: {{ temp }}°C</p>
-        <p>Humidity: {{ humidity }}%</p>
-        <p>Condition: {{ description }}</p>
+        <!-- Search Form -->
+        <div class="flex justify-center mb-8">
+            <form method="GET" action="" class="flex gap-4 w-full max-w-2xl">
+                <input 
+                    type="text" 
+                    name="city" 
+                    placeholder="Enter city name" 
+                    class="flex-grow px-4 py-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                <button 
+                    type="submit" 
+                    class="px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold transition duration-300"
+                >
+                    Search
+                </button>
+            </form>
+        </div>
+
+        <!-- Error Message -->
+        {% if error %}
+        <p class="text-red-400 text-center mb-6">{{ error }}</p>
+        {% endif %}
+
+        <!-- Weather Details -->
+        {% if not error %}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 fade-in">
+            <!-- Weather Info Card -->
+            <div class="p-6 bg-gray-800 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold mb-4 text-center">{{ city }} Weather</h2>
+                <ul class="space-y-2">
+                    <li class="text-lg">🌡️ Temperature: <span class="font-bold">{{ temp }}°C</span></li>
+                    <li class="text-lg">💧 Humidity: <span class="font-bold">{{ humidity }}%</span></li>
+                    <li class="text-lg">🌤️ Condition: <span class="font-bold capitalize">{{ description }}</span></li>
+                    <li class="text-lg">🌬️ Wind Speed: <span class="font-bold">{{ wind_speed }} km/h</span></li>
+                </ul>
+            </div>
+
+            <!-- Weather Chart -->
+            <div class="p-6 bg-gray-800 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold mb-4 text-center">Temperature Trends</h2>
+                <canvas id="tempChart" class="w-full h-64"></canvas>
+            </div>
+        </div>
+
+        <!-- Additional Graphs -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8 fade-in">
+            <!-- Humidity Chart -->
+            <div class="p-6 bg-gray-800 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold mb-4 text-center">Humidity Levels</h2>
+                <canvas id="humidityChart" class="w-full h-64"></canvas>
+            </div>
+
+            <!-- Wind Speed Chart -->
+            <div class="p-6 bg-gray-800 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold mb-4 text-center">Wind Speed Trends</h2>
+                <canvas id="windChart" class="w-full h-64"></canvas>
+            </div>
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
+
+    <script>
+        // Example data for charts (replace with dynamic data from your backend)
+        const tempData = [15, 17, 19, 21, 20, 18, 16];
+        const humidityData = [60, 65, 70, 75, 80, 85, 90];
+        const windData = [10, 12, 8, 15, 9, 11, 14];
+
+        // Temperature Chart
+        const tempCtx = document.getElementById('tempChart').getContext('2d');
+        new Chart(tempCtx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Temperature (°C)',
+                    data: tempData,
+                    borderColor: '#4F46E5',
+                    backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                    fill: true,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true },
+                },
+            }
+        });
+
+        // Humidity Chart
+        const humidityCtx = document.getElementById('humidityChart').getContext('2d');
+        new Chart(humidityCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Humidity (%)',
+                    data: humidityData,
+                    backgroundColor: '#34D399',
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true },
+                },
+            }
+        });
+
+        // Wind Speed Chart
+        const windCtx = document.getElementById('windChart').getContext('2d');
+        new Chart(windCtx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Wind Speed (km/h)',
+                    data: windData,
+                    borderColor: '#F59E0B',
+                    backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                    fill: true,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true },
+                },
+            }
+        });
+    </script>
 </body>
 </html>
